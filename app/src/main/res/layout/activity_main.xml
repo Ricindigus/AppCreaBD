@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="APP CARGA BD"
+        android:textSize="32sp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"/>
+    <Button
+        android:id="@+id/cargaDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/icons"
+        android:text="generar bd"/>
+    <Button
+        android:id="@+id/resumenCajas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/brownPrimaryDark"
+        android:textColor="@color/icons"
+        android:text="FIREBASE RESUMEN CAJAS"/>
+    <Button
+        android:id="@+id/resumenAsistencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/brownPrimaryDark"
+        android:textColor="@color/icons"
+        android:text="FIREBASE RESUMEN ASISTENCIA"/>
+    <Button
+        android:id="@+id/resumenInventario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/brownPrimaryDark"
+        android:textColor="@color/icons"
+        android:text="FIREBASE RESUMEN INVENTARIO"/>
+    <Button
+        android:id="@+id/coleccionCajas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bluePrimaryDark"
+        android:textColor="@color/icons"
+        android:text="FIREBASE COLECCION CAJAS"/>
+    <Button
+        android:id="@+id/coleccionAsistencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bluePrimaryDark"
+        android:textColor="@color/icons"
+        android:text="FIREBASE COLECCION ASISTENCIA"/>
+    <Button
+        android:id="@+id/coleccionInventario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bluePrimaryDark"
+        android:textColor="@color/icons"
+        android:text="FIREBASE COLECCION INVENTARIO"/>
+</LinearLayout>
