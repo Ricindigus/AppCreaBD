@@ -4,26 +4,29 @@ import android.content.ContentValues;
 
 public class Caja {
     private String _id;
-    private String codcaja;
-    private String ccdd;
+    private String cod_barra_caja;
     private int idnacional;
-    private String codsede;
+    private String ccdd;
+    private String departamento;
+    private String idsede;
     private String nomsede;
-    private int codlocal;
-    private String nomlocal;
+    private int idlocal;
+    private String local;
     private int tipo;
     private int nlado;
     private int acl;
 
-    public Caja(String _id, String codcaja, String ccdd, int idnacional, String codsede, String nomsede, int codlocal, String nomlocal, int tipo, int nlado, int acl) {
+
+    public Caja(String _id, String cod_barra_caja, int idnacional, String ccdd, String departamento, String idsede, String nomsede, int idlocal, String local, int tipo, int nlado, int acl) {
         this._id = _id;
-        this.codcaja = codcaja;
-        this.ccdd = ccdd;
+        this.cod_barra_caja = cod_barra_caja;
         this.idnacional = idnacional;
-        this.codsede = codsede;
+        this.ccdd = ccdd;
+        this.departamento = departamento;
+        this.idsede = idsede;
         this.nomsede = nomsede;
-        this.codlocal = codlocal;
-        this.nomlocal = nomlocal;
+        this.idlocal = idlocal;
+        this.local = local;
         this.tipo = tipo;
         this.nlado = nlado;
         this.acl = acl;
@@ -40,20 +43,12 @@ public class Caja {
         this._id = _id;
     }
 
-    public String getCodcaja() {
-        return codcaja;
+    public String getCod_barra_caja() {
+        return cod_barra_caja;
     }
 
-    public void setCodcaja(String codcaja) {
-        this.codcaja = codcaja;
-    }
-
-    public String getCcdd() {
-        return ccdd;
-    }
-
-    public void setCcdd(String ccdd) {
-        this.ccdd = ccdd;
+    public void setCod_barra_caja(String cod_barra_caja) {
+        this.cod_barra_caja = cod_barra_caja;
     }
 
     public int getIdnacional() {
@@ -64,12 +59,28 @@ public class Caja {
         this.idnacional = idnacional;
     }
 
-    public String getCodsede() {
-        return codsede;
+    public String getCcdd() {
+        return ccdd;
     }
 
-    public void setCodsede(String codsede) {
-        this.codsede = codsede;
+    public void setCcdd(String ccdd) {
+        this.ccdd = ccdd;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getIdsede() {
+        return idsede;
+    }
+
+    public void setIdsede(String idsede) {
+        this.idsede = idsede;
     }
 
     public String getNomsede() {
@@ -80,20 +91,20 @@ public class Caja {
         this.nomsede = nomsede;
     }
 
-    public int getCodlocal() {
-        return codlocal;
+    public int getIdlocal() {
+        return idlocal;
     }
 
-    public void setCodlocal(int codlocal) {
-        this.codlocal = codlocal;
+    public void setIdlocal(int idlocal) {
+        this.idlocal = idlocal;
     }
 
-    public String getNomlocal() {
-        return nomlocal;
+    public String getLocal() {
+        return local;
     }
 
-    public void setNomlocal(String nomlocal) {
-        this.nomlocal = nomlocal;
+    public void setLocal(String local) {
+        this.local = local;
     }
 
     public int getTipo() {
@@ -123,13 +134,14 @@ public class Caja {
     public ContentValues toValues(){
         ContentValues contentValues = new ContentValues();
         contentValues.put(SQLConstantes.cajas_id,_id);
-        contentValues.put(SQLConstantes.cajas_codcaja,codcaja);
+        contentValues.put(SQLConstantes.cajas_codcaja,cod_barra_caja);
         contentValues.put(SQLConstantes.cajas_idnacional,idnacional);
         contentValues.put(SQLConstantes.cajas_ccdd,ccdd);
-        contentValues.put(SQLConstantes.cajas_codsede,codsede);
+        contentValues.put(SQLConstantes.cajas_departamento,departamento);
+        contentValues.put(SQLConstantes.cajas_idsede,idsede);
         contentValues.put(SQLConstantes.cajas_nomsede,nomsede);
-        contentValues.put(SQLConstantes.cajas_codlocal,codlocal);
-        contentValues.put(SQLConstantes.cajas_nomlocal,nomlocal);
+        contentValues.put(SQLConstantes.cajas_idlocal,idlocal);
+        contentValues.put(SQLConstantes.cajas_nomlocal,local);
         contentValues.put(SQLConstantes.cajas_tipo,tipo);
         contentValues.put(SQLConstantes.cajas_nlado,nlado);
         contentValues.put(SQLConstantes.cajas_acl,acl);

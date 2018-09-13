@@ -44,13 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void leerExcelCajas(Context context) {
+    public ArrayList<Caja> leerExcelCajas(Context context) {
+        ArrayList<Caja> cajas = new ArrayList<>();
+        Data data =  new Data(MainActivity.this);
+        data.open();
         try{
             InputStream stream = context.getAssets().open("cajas.xls");
             POIFSFileSystem myFileSystem = new POIFSFileSystem(stream);
             HSSFWorkbook miLibro = new HSSFWorkbook(myFileSystem);
             HSSFSheet miHoja = miLibro.getSheetAt(0);
-
             Iterator IteradorFila = miHoja.rowIterator();
             while(IteradorFila.hasNext()){
                 HSSFRow miFila = (HSSFRow) IteradorFila.next();
@@ -59,26 +61,28 @@ public class MainActivity extends AppCompatActivity {
                 int contCelda = 1;
                 while(iteradorCelda.hasNext()){
                     HSSFCell miCelda = (HSSFCell) iteradorCelda.next();
+                    String valorCelda = miCelda.getStringCellValue();
                     switch (contCelda){
-                        case HojaCajas.CAJA_CODIGO:caja.setCodcaja(miCelda.getStringCellValue());break;
-                        case HojaCajas.CAJA_CDD:caja.setCcdd(miCelda.getStringCellValue());break;
-                        case HojaCajas.CAJA_IDNACIONAL:caja.setIdnacional(Integer.parseInt(miCelda.getStringCellValue()));break;
-                        case HojaCajas.CAJA_IDSEDE:caja.setCodsede(miCelda.getStringCellValue());break;
-                        case HojaCajas.CAJA_NOMSEDE:caja.setNomsede(miCelda.getStringCellValue());break;
-                        case HojaCajas.CAJA_IDLOCAL:caja.setCodlocal(Integer.parseInt(miCelda.getStringCellValue()));break;
-                        case HojaCajas.CAJA_NOMLOCAL:caja.setNomlocal(miCelda.getStringCellValue());break;
-                        case HojaCajas.CAJA_TIPO:caja.setTipo(Integer.parseInt(miCelda.getStringCellValue()));break;
-                        case HojaCajas.CAJA_NLADO:caja.setNlado(Integer.parseInt(miCelda.getStringCellValue()));break;
-                        case HojaCajas.CAJA_ACL:caja.setAcl(Integer.parseInt(miCelda.getStringCellValue()));break;
+                        case HojaCajas.CAJA_CODIGO:if (valorCelda.equals("NULL"))caja.setCod_barra_caja(null); else caja.setCod_barra_caja(valorCelda);break;
+                        case HojaCajas.CAJA_CCDD:if (valorCelda.equals("NULL"))caja.setCcdd(null); else caja.setCcdd(valorCelda);break;
+                        case HojaCajas.CAJA_DEPARTAMENTO:if (valorCelda.equals("NULL"))caja.setDepartamento(null); else caja.setDepartamento(valorCelda);break;
+                        case HojaCajas.CAJA_IDNACIONAL:if (valorCelda.equals("NULL"))caja.setIdnacional(0); else caja.setIdnacional(Integer.parseInt(valorCelda));break;
+                        case HojaCajas.CAJA_IDSEDE:if (valorCelda.equals("NULL"))caja.setIdsede(null); else caja.setIdsede(valorCelda);break;
+                        case HojaCajas.CAJA_NOMSEDE:if (valorCelda.equals("NULL"))caja.setNomsede(null); else caja.setNomsede(valorCelda);break;
+                        case HojaCajas.CAJA_IDLOCAL:if (valorCelda.equals("NULL"))caja.setIdlocal(0); else caja.setIdlocal(Integer.parseInt(valorCelda));break;
+                        case HojaCajas.CAJA_NOMLOCAL:if (valorCelda.equals("NULL"))caja.setLocal(null); else caja.setLocal(valorCelda);break;
+                        case HojaCajas.CAJA_TIPO:if (valorCelda.equals("NULL"))caja.setTipo(0); else caja.setTipo(Integer.parseInt(valorCelda));break;
+                        case HojaCajas.CAJA_NLADO:if (valorCelda.equals("NULL"))caja.setNlado(0); else caja.setNlado(Integer.parseInt(valorCelda));break;
+                        case HojaCajas.CAJA_ACL:if (valorCelda.equals("NULL"))caja.setAcl(0); else caja.setAcl(Integer.parseInt(valorCelda));break;
                     }
-//                    if(contador == 1) itemMarco.setNumero(""+(int)myCell.getNumericCellValue());
-//                    if(contador == 2) itemMarco.setRuc(myCell.toString());
-//                    if(contador == 3) itemMarco.setRazonSocial(""+(int)myCell.getNumericCellValue());
                     contCelda++;
                 }
                 Toast.makeText(context, ""+caja.toString(), Toast.LENGTH_SHORT).show();
-
             }
-        }catch (Exception e){e.printStackTrace(); }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        data.close();
+        return cajas;
     }
 }
