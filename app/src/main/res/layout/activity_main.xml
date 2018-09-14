@@ -22,6 +22,13 @@
         android:textColor="@color/icons"
         android:text="generar bd"/>
     <Button
+        android:id="@+id/exportaBD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/icons"
+        android:text="EXPORTAR BD"/>
+    <Button
         android:id="@+id/resumenCajas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

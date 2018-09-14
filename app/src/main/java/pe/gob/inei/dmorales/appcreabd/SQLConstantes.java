@@ -1,8 +1,8 @@
 package pe.gob.inei.dmorales.appcreabd;
 
 public class SQLConstantes {
-    public static String DB_PATH = "/data/data/pe.com.ricindigus.appednom2018/databases/";
-    public static String DB_NAME = "mydatabase.sqlite";
+    public static String DB_PATH = "/data/data/pe.gob.inei.dmorales.appcreabd/databases/";
+    public static String DB_NAME = "mydatabase.";
     public static final String tablacajas = "cajas";
 
     public static final String cajas_id = "_id";

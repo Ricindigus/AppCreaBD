@@ -133,18 +133,17 @@ public class Caja {
 
     public ContentValues toValues(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(SQLConstantes.cajas_id,_id);
-        contentValues.put(SQLConstantes.cajas_codcaja,cod_barra_caja);
-        contentValues.put(SQLConstantes.cajas_idnacional,idnacional);
-        contentValues.put(SQLConstantes.cajas_ccdd,ccdd);
-        contentValues.put(SQLConstantes.cajas_departamento,departamento);
-        contentValues.put(SQLConstantes.cajas_idsede,idsede);
-        contentValues.put(SQLConstantes.cajas_nomsede,nomsede);
-        contentValues.put(SQLConstantes.cajas_idlocal,idlocal);
-        contentValues.put(SQLConstantes.cajas_nomlocal,local);
-        contentValues.put(SQLConstantes.cajas_tipo,tipo);
-        contentValues.put(SQLConstantes.cajas_nlado,nlado);
-        contentValues.put(SQLConstantes.cajas_acl,acl);
+        if (cod_barra_caja != null) contentValues.put(SQLConstantes.cajas_codcaja,cod_barra_caja);
+        if (idnacional != -1) contentValues.put(SQLConstantes.cajas_idnacional,idnacional);
+        if (ccdd != null) contentValues.put(SQLConstantes.cajas_ccdd,ccdd);
+        if (departamento != null) contentValues.put(SQLConstantes.cajas_departamento,departamento);
+        if (idsede != null) contentValues.put(SQLConstantes.cajas_idsede,idsede);
+        if (nomsede != null) contentValues.put(SQLConstantes.cajas_nomsede,nomsede);
+        if (idlocal != -1) contentValues.put(SQLConstantes.cajas_idlocal,idlocal);
+        if (local != null) contentValues.put(SQLConstantes.cajas_nomlocal,local);
+        if (tipo != -1)  contentValues.put(SQLConstantes.cajas_tipo,tipo);
+        if (nlado != -1)  contentValues.put(SQLConstantes.cajas_nlado,nlado);
+        if (acl != -1) contentValues.put(SQLConstantes.cajas_acl,acl);
         return contentValues;
     }
 }
