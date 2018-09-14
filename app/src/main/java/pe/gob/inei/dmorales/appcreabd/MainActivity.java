@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 leerExcelCajas(MainActivity.this);
+                leerExcelAsistencia1(MainActivity.this);
             }
         });
 
@@ -66,12 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Caja> leerExcelCajas(Context context) {
-        ArrayList<Caja> cajas = new ArrayList<>();
+    public void leerExcelCajas(Context context) {
         Data data =  new Data(MainActivity.this);
         data.open();
         try{
-            InputStream stream = context.getAssets().open("cajas.xls");
+            InputStream stream = context.getAssets().open("marco.xls");
             POIFSFileSystem myFileSystem = new POIFSFileSystem(stream);
             HSSFWorkbook miLibro = new HSSFWorkbook(myFileSystem);
             HSSFSheet miHoja = miLibro.getSheetAt(0);
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 HSSFRow miFila = (HSSFRow) IteradorFila.next();
                 Iterator iteradorCelda = miFila.cellIterator();
                 Caja caja = new Caja();
-                ContentValues contentValues = new ContentValues();
                 int contCelda = 1;
                 while(iteradorCelda.hasNext()){
                     HSSFCell miCelda = (HSSFCell) iteradorCelda.next();
@@ -106,15 +105,62 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        if (data.getNumeroItemsCajas() > 0) Toast.makeText(context, "Listo creado", Toast.LENGTH_SHORT).show();
+        if (data.getNumeroItemsCajas() > 0) Toast.makeText(context, "Listo cajas", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(context, "Fallo cajas", Toast.LENGTH_SHORT).show();
         data.close();
-        return cajas;
+    }
+
+    public void leerExcelAsistencia1(Context context) {
+        Data data =  new Data(MainActivity.this);
+        data.open();
+        try{
+            InputStream stream = context.getAssets().open("marco.xls");
+            POIFSFileSystem myFileSystem = new POIFSFileSystem(stream);
+            HSSFWorkbook miLibro = new HSSFWorkbook(myFileSystem);
+            HSSFSheet miHoja = miLibro.getSheetAt(1);
+            Iterator IteradorFila = miHoja.rowIterator();
+            while(IteradorFila.hasNext()){
+                HSSFRow miFila = (HSSFRow) IteradorFila.next();
+                Iterator iteradorCelda = miFila.cellIterator();
+                Asistencia asistencia = new Asistencia();
+                int contCelda = 1;
+                while(iteradorCelda.hasNext()){
+                    HSSFCell miCelda = (HSSFCell) iteradorCelda.next();
+                    String valorCelda = miCelda.getStringCellValue();
+                    switch (contCelda){
+                        case HojaAsistencia.ASISTENCIA_DNI:if (valorCelda.equals("NULL"))asistencia.setDni(null); else asistencia.setDni(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_NOMBRES:if (valorCelda.equals("NULL"))asistencia.setNombres(null); else asistencia.setNombres(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_APE_PATERNO:if (valorCelda.equals("NULL"))asistencia.setApe_paterno(null); else asistencia.setApe_paterno(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_APE_MATERNO:if (valorCelda.equals("NULL"))asistencia.setApe_materno(null); else asistencia.setApe_materno(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_NRO_AULA:if (valorCelda.equals("NULL"))asistencia.setNaula(-1); else asistencia.setNaula(Integer.parseInt(valorCelda));break;
+                        case HojaAsistencia.ASISTENCIA_CODIGO_PAGINA:if (valorCelda.equals("NULL"))asistencia.setCod_pagina(null); else asistencia.setCod_pagina(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_DISCAPACIDAD:if (valorCelda.equals("NULL"))asistencia.setDiscapacidad(null); else asistencia.setDiscapacidad(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_PRIORIDAD:if (valorCelda.equals("NULL"))asistencia.setPrioridad(null); else asistencia.setPrioridad(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_ID_NACIONAL:if (valorCelda.equals("NULL"))asistencia.setIdnacional(-1); else asistencia.setIdnacional(Integer.parseInt(valorCelda));break;
+                        case HojaAsistencia.ASISTENCIA_COD_SEDE:if (valorCelda.equals("NULL"))asistencia.setIdsede(null); else asistencia.setIdsede(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_NOM_SEDE:if (valorCelda.equals("NULL"))asistencia.setSede(null); else asistencia.setSede(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_COD_DEPARTAMENTO:if (valorCelda.equals("NULL"))asistencia.setCcdd(null); else asistencia.setCcdd(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_NOM_DEPARTAMENTO:if (valorCelda.equals("NULL"))asistencia.setDepartamento(null); else asistencia.setDepartamento(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_COD_LOCAL:if (valorCelda.equals("NULL"))asistencia.setIdlocal(-1); else asistencia.setIdlocal(Integer.parseInt(valorCelda));break;
+                        case HojaAsistencia.ASISTENCIA_NOM_LOCAL:if (valorCelda.equals("NULL"))asistencia.setLocal(null); else asistencia.setLocal(valorCelda);break;
+                        case HojaAsistencia.ASISTENCIA_DIRECCION:if (valorCelda.equals("NULL"))asistencia.setDireccion(null); else asistencia.setDireccion(valorCelda);break;
+                    }
+                    contCelda++;
+                }
+                data.insertarAsistencia(asistencia);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if (data.getNumeroItemsAsistencias() > 0) Toast.makeText(context, "Listo asistencia", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(context, "Fallo asistencia", Toast.LENGTH_SHORT).show();
+        data.close();
     }
 
     public void exportarBD()throws IOException {
         String inFileName = SQLConstantes.DB_PATH + SQLConstantes.DB_NAME;
         InputStream myInput = new FileInputStream(inFileName);
-        String outFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/miBD.sqlite";
+        String outFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/miBD1.sqlite";
         OutputStream myOutput = new FileOutputStream(outFileName);
         byte[] buffer = new byte[1024];
         int length;

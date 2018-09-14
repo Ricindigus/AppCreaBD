@@ -14,11 +14,13 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQLConstantes.CREAR_TABLA_CAJAS);
+        db.execSQL(SQLConstantes.CREAR_TABLA_ASISTENCIA);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQLConstantes.DELETE_TABLA_CAJAS);
+        db.execSQL(SQLConstantes.DELETE_TABLA_ASISTENCIA);
         onCreate(db);
     }
 }
