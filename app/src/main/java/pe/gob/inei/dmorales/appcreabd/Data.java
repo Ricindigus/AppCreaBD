@@ -193,4 +193,9 @@ public class Data {
         }
         return asistencias;
     }
+
+    public void insertarInventario(Inventario inventario){
+        ContentValues contentValues = inventario.toValues();
+        sqLiteDatabase.insert(SQLConstantes.tablainventario,null,contentValues);
+    }
 }
